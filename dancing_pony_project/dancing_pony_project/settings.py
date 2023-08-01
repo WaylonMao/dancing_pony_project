@@ -126,4 +126,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'dancing_pony.throttles.DishesRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'dishes': '100/hour',
+    },
 }
