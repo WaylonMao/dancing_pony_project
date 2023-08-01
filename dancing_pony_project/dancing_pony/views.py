@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .models import Dish
+from .permissions import CanRateDish
 from .serializers import DishSerializer
 from rest_framework.permissions import IsAuthenticated
 
@@ -23,7 +24,7 @@ class DishRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class DishRatingView(generics.GenericAPIView):
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, CanRateDish]
 
     def post(self, request, pk):
         dish = self.get_object()
